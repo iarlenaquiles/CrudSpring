@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import exception.UniadvException;
 import model.Cliente;
 import repository.ClienteRepository;
 import springboot.service.ClienteService;
@@ -16,31 +17,28 @@ public class ClienteServiceImpl implements ClienteService {
 	private ClienteRepository clienteRepository;
 
 	@Override
-	public void salvar(Cliente cliente) {
-
+	public void salvar(Cliente cliente) throws UniadvException{
+		clienteRepository.save(cliente);
 	}
 
 	@Override
 	public void atualizar(Cliente cliente) {
-		// TODO Auto-generated method stub
+		clienteRepository.save(cliente);
 
 	}
 
 	@Override
 	public List<Cliente> getTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return clienteRepository.findAll();
 	}
 
 	@Override
 	public Cliente buscarById(Integer id) {
-		return clienteRepository.findById(id);
+		return clienteRepository.findOne(id);
 	} 
 
 	@Override
 	public void remove(Integer id) {
-		// TODO Auto-generated method stub
-
+		clienteRepository.delete(id);
 	}
-
 }
